@@ -446,6 +446,9 @@ SWITCH_CONFIG = {
         # right side
         "SD": { "default": "2POS",   "display": [ 1, 0 ] },
         "SC": { "default": "3POS", "display": [ 1, 1 ] },
+        #custom
+        "SF": { "default": "2POS",   "display": [ 2, 0 ] },
+        "SG": { "default": "3POS", "display": [ 2, 1 ] },
     },
 }
 

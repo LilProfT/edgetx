@@ -202,7 +202,8 @@ POT_CONFIG = {
         "P2": {"default": "POT"}
     },
     "pocket": {
-        "P1": {"default": "POT"}
+        "P1": {"default": "POT"},
+        "P2": {"default": "POT"}
     },
 }
 

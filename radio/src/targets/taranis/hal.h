@@ -1108,9 +1108,22 @@
   #define HARDWARE_SWITCH_F
   #define SWITCHES_GPIO_REG_F           GPIOB
   #define SWITCHES_GPIO_PIN_F           LL_GPIO_PIN_5 // PB.05
+#elif defined(RADIO_POCKET)
+  #define STORAGE_SWITCH_F
+  #define HARDWARE_SWITCH_F
+  #define SWITCHES_GPIO_REG_F           GPIOE
+  #define SWITCHES_GPIO_PIN_F           LL_GPIO_PIN_14 // PE.14
+
+    #define STORAGE_SWITCH_G
+  #define HARDWARE_SWITCH_G
+  #define SWITCHES_GPIO_REG_G_H         GPIOA
+  #define SWITCHES_GPIO_PIN_G_H         LL_GPIO_PIN_8  // PA.08
+  #define SWITCHES_GPIO_REG_G_L         GPIOA
+  #define SWITCHES_GPIO_PIN_G_L         LL_GPIO_PIN_14  // PA.14
+
 #elif defined(RADIO_MT12)
   // ADC based switch/pot
-#elif defined(RADIO_T8) || defined(RADIO_TLITE) || defined(RADIO_TPROV2) || defined(RADIO_COMMANDO8) || defined(RADIO_LR3PRO) || defined(RADIO_POCKET)
+#elif defined(RADIO_T8) || defined(RADIO_TLITE) || defined(RADIO_TPROV2) || defined(RADIO_COMMANDO8) || defined(RADIO_LR3PRO)
   // no SWF
   #define STORAGE_SWITCH_F
 #elif defined(RADIO_T12)
@@ -1169,7 +1182,7 @@
   #define HARDWARE_SWITCH_G
   #define SWITCHES_GPIO_REG_G           GPIOD
   #define SWITCHES_GPIO_PIN_G           LL_GPIO_PIN_15  // PD.15
-#elif defined(PCBX7) || defined(PCBXLITE) || defined(PCBX9LITE)  || defined(RADIO_T8) || defined(RADIO_COMMANDO8) || defined(RADIO_MT12) || defined(RADIO_POCKET) || defined(RADIO_T14) || defined(RADIO_T12MAX) || defined(RADIO_TPROS)
+#elif defined(PCBX7) || defined(PCBXLITE) || defined(PCBX9LITE)  || defined(RADIO_T8) || defined(RADIO_COMMANDO8) || defined(RADIO_MT12) || defined(RADIO_T14) || defined(RADIO_T12MAX) || defined(RADIO_TPROS)
   // no SWG
 #else
   #define STORAGE_SWITCH_G
@@ -1859,6 +1872,7 @@
 #if !defined(RADIO_POCKET)
   #define ADC_GPIO_PIN_POT2             LL_GPIO_PIN_6  // PA.06
 #endif
+  #define ADC_GPIO_PIN_POT2             LL_GPIO_PIN_6  // PA.06
   #define ADC_GPIO_PIN_BATT             LL_GPIO_PIN_0  // PC.00
 #if defined(RADIO_BOXER)
   #define HARDWARE_POT3                 // 6 POS
@@ -1939,7 +1953,7 @@
 #elif defined(RADIO_ZORRO)
   #define ADC_DIRECTION {-1, 1, 1, -1, -1, 1, 1, 1}
 #elif defined(RADIO_POCKET)
-  #define ADC_DIRECTION {-1, 1, 1, -1, -1}
+  #define ADC_DIRECTION {-1, 1, 1, -1, -1, 1, 1, 1}
 #elif defined(RADIO_TPRO) || defined(RADIO_TPROV2) || defined(RADIO_TPROS)
   #define ADC_DIRECTION {1,-1,1,-1,  1,1,  1,  1}
 #elif defined(RADIO_BUMBLEBEE)
@@ -2930,6 +2944,17 @@
   #define LCD_A0_GPIO_PIN               GPIO_Pin_11 // PC.11  //MOSI
   #define LCD_NCS_GPIO                  GPIOA
   #define LCD_NCS_GPIO_PIN              GPIO_Pin_15 // PA.15
+
+  // #define LCD_RCC_AHB1Periph            (RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOD | RCC_AHB1Periph_DMA1)
+  // #define LCD_RCC_APB1Periph            RCC_APB1Periph_SPI2
+  // #define LCD_SPI_GPIO                  GPIOB
+  // #define LCD_MOSI_GPIO_PIN             GPIO_Pin_15 // PC.12
+  // #define LCD_MOSI_GPIO_PinSource       GPIO_PinSource15                //B15
+  // #define LCD_CLK_GPIO_PIN              GPIO_Pin_13 // PC.10
+  // #define LCD_CLK_GPIO_PinSource        GPIO_PinSource13                //B13
+  // #define LCD_A0_GPIO_PIN               GPIO_Pin_14 // PC.11  //MOSI    //B14
+  // #define LCD_NCS_GPIO                  GPIOB
+  // #define LCD_NCS_GPIO_PIN              GPIO_Pin_12 // PA.15            //B12
 #if defined(RADIO_FAMILY_T20) || defined(RADIO_BUMBLEBEE)
   #define LCD_RST_GPIO                  GPIOA
   #define LCD_RST_GPIO_PIN              GPIO_Pin_14 // PA.14
@@ -2945,6 +2970,8 @@
   #define LCD_DMA_FLAG_INT              DMA_HIFCR_CTCIF7
   #define LCD_SPI                       SPI3
   #define LCD_GPIO_AF                   GPIO_AF_SPI3
+  // #define LCD_SPI                       SPI2
+  // #define LCD_GPIO_AF                   GPIO_AF_SPI2
 #else
   #define LCD_RCC_AHB1Periph            RCC_AHB1Periph_GPIOD
   #define LCD_RCC_APB1Periph            0
@@ -3047,6 +3074,13 @@
 #define SD_GPIO_PIN_SCK                 LL_GPIO_PIN_13 // PB.13
 #define SD_GPIO_PIN_MISO                LL_GPIO_PIN_14 // PB.14
 #define SD_GPIO_PIN_MOSI                LL_GPIO_PIN_15 // PB.15
+// #define SD_GPIO                         GPIOC
+// #define SD_GPIO_PIN_CS                  LL_GPIO_PIN_8 // PB.12
+// #define SD_GPIO_PIN_SCK                 LL_GPIO_PIN_9 // PB.13
+// #define SD_GPIO_PIN_MISO                LL_GPIO_PIN_11 // PB.14
+// #define SD_GPIO_PIN_MOSI                LL_GPIO_PIN_12 // PB.15
+
+// #define SD_SPI                          SPI3
 
 #define SD_SPI                          SPI2
 #define SD_SPI_DMA                      DMA1
@@ -3222,7 +3256,7 @@
   #elif defined(MANUFACTURER_RADIOMASTER)
     #if defined(RADIO_POCKET)
       #define BT_EN_GPIO                  GPIOA
-      #define BT_EN_GPIO_PIN              LL_GPIO_PIN_6  // PA.06
+      #define BT_EN_GPIO_PIN              LL_GPIO_PIN_10  // PA.10
       #define BT_RCC_AHB1Periph           (RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOA) // RCC_AHB1Periph_DMA1
     #else
       // No enable port on those RM BLE port

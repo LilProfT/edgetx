@@ -284,7 +284,7 @@ int Boards::getCapability(Board::Type board, Board::Capability capability)
   //      some could be used when importing pre v2.10 configurations
   switch (capability) {
     case FactoryInstalledPots:
-      if (IS_TARANIS_X9(board))
+      if (IS_TARANIS_X9(board) || board == BOARD_RADIOMASTER_POCKET)
         return 2;
       else
         return getCapability(board, Pots);
@@ -299,7 +299,7 @@ int Boards::getCapability(Board::Type board, Board::Capability capability)
       else if(IS_RADIOMASTER_ZORRO(board))
         return 8;
       else if (board == BOARD_RADIOMASTER_POCKET)
-        return 5;
+        return 7;
       else if (IS_FAMILY_T12(board))
         return 6;
       else if (IS_HORUS_X12S(board))
@@ -428,6 +428,7 @@ StringTagMappingTable Boards::getLegacyAnalogsLookupTable(Board::Type board)
   } else if (IS_RADIOMASTER_POCKET(board)) {
     tbl.insert(tbl.end(), {
                               {tr("P1").toStdString(), "P1"},
+                              {tr("P2").toStdString(), "P2"}
                           });
   } else if ((IS_TARANIS_SMALL(board) && !IS_JUMPER_TLITE(board) && !IS_JUMPER_T20(board)) || IS_FLYSKY_NV14(board) || IS_FLYSKY_EL18(board)) {
     tbl.insert(tbl.end(), {
